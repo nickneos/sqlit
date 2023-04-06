@@ -1,0 +1,137 @@
+{% extends "layout.html" %}
+
+
+{% block main %}
+
+    <h1 class="text-body-emphasis">Convert to T-SQL</h1>
+    <p class="fs-5 col-md-8">
+        {% if output is none %}
+            Paste data from excel (or any other data in tab-delimited format) and then press the button!
+        {% else %}
+            Input converted to T-SQL
+        {% endif %}
+    </p>
+    <form action="/" method="post">
+        <textarea id="indata" name="in" style="width:100%;" rows="20">{% if output is not none %}{{ output }}{% endif %}</textarea>
+        <div class="mb-5">
+            {% if output is none %}
+                <button class="btn btn-primary btn-lg px-4" type="submit">Give me the SQL!</button>
+            {% else %}
+                <a class="btn btn-primary btn-lg px-4" href="/"><span data-feather="arrow-left" class="align-text-bottom"></span></a>
+                <a class="btn btn-primary btn-lg px-4" onclick="myFunction()" href="#"><span data-feather="copy" class="align-text-bottom"></span></a>
+            {% endif %}
+        </div>
+    </form>
+
+    <hr class="col-3 col-md-2 mb-5">
+
+    <div class="row g-5">
+        <div class="col-md-6">
+            <h2 class="text-body-emphasis">Starter projects</h2>
+            <p>Ready to beyond the starter template? Check out these open source projects that you can quickly
+                duplicate to a new GitHub repository.</p>
+            <ul class="list-unstyled ps-0">
+                <li>
+                    <a class="icon-link mb-1" href="https://github.com/twbs/examples/tree/main/icons-font"
+                        rel="noopener" target="_blank">
+                        <svg class="bi" width="16" height="16">
+                            <use xlink:href="#arrow-right-circle" />
+                        </svg>
+                        Bootstrap npm starter
+                    </a>
+                </li>
+                <li>
+                    <a class="icon-link mb-1" href="https://github.com/twbs/examples/tree/main/parcel"
+                        rel="noopener" target="_blank">
+                        <svg class="bi" width="16" height="16">
+                            <use xlink:href="#arrow-right-circle" />
+                        </svg>
+                        Bootstrap Parcel starter
+                    </a>
+                </li>
+                <li>
+                    <a class="icon-link mb-1" href="https://github.com/twbs/examples/tree/main/vite"
+                        rel="noopener" target="_blank">
+                        <svg class="bi" width="16" height="16">
+                            <use xlink:href="#arrow-right-circle" />
+                        </svg>
+                        Bootstrap Vite starter
+                    </a>
+                </li>
+                <li>
+                    <a class="icon-link mb-1" href="https://github.com/twbs/examples/tree/main/webpack"
+                        rel="noopener" target="_blank">
+                        <svg class="bi" width="16" height="16">
+                            <use xlink:href="#arrow-right-circle" />
+                        </svg>
+                        Bootstrap Webpack starter
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-6">
+            <h2 class="text-body-emphasis">Guides</h2>
+            <p>Read more detailed instructions and documentation on using or contributing to Bootstrap.</p>
+            <ul class="list-unstyled ps-0">
+                <li>
+                    <a class="icon-link mb-1" href="/docs/5.3/getting-started/introduction/">
+                        <svg class="bi" width="16" height="16">
+                            <use xlink:href="#arrow-right-circle" />
+                        </svg>
+                        Bootstrap quick start guide
+                    </a>
+                </li>
+                <li>
+                    <a class="icon-link mb-1" href="/docs/5.3/getting-started/webpack/">
+                        <svg class="bi" width="16" height="16">
+                            <use xlink:href="#arrow-right-circle" />
+                        </svg>
+                        Bootstrap Webpack guide
+                    </a>
+                </li>
+                <li>
+                    <a class="icon-link mb-1" href="/docs/5.3/getting-started/parcel/">
+                        <svg class="bi" width="16" height="16">
+                            <use xlink:href="#arrow-right-circle" />
+                        </svg>
+                        Bootstrap Parcel guide
+                    </a>
+                </li>
+                <li>
+                    <a class="icon-link mb-1" href="/docs/5.3/getting-started/vite/">
+                        <svg class="bi" width="16" height="16">
+                            <use xlink:href="#arrow-right-circle" />
+                        </svg>
+                        Bootstrap Vite guide
+                    </a>
+                </li>
+                <li>
+                    <a class="icon-link mb-1" href="/docs/5.3/getting-started/contribute/">
+                        <svg class="bi" width="16" height="16">
+                            <use xlink:href="#arrow-right-circle" />
+                        </svg>
+                        Contributing to Bootstrap
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+    function myFunction() {
+        // Get the text field
+        var copyText = document.getElementById("indata");
+
+        // Select the text field
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(copyText.value);
+        
+        // Alert the copied text
+        // alert("Copied the text: " + copyText.value);
+    }
+    </script>
+{% endblock %}
