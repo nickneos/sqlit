@@ -4,17 +4,21 @@
 {% block main %}
 
     <h1 class="text-body-emphasis">Convert to T-SQL</h1>
-    <p class="fs-5 col-md-8">
+    <p class="fs-5">
         {% if output is none %}
-            Paste data from excel (or any other data in tab-delimited format) and then press the button!
+            Paste data below
         {% else %}
             Input converted to T-SQL
         {% endif %}
     </p>
     <form action="/" method="post">
-        <textarea id="indata" name="in" style="width:100%;" rows="20">{% if output is not none %}{{ output }}{% endif %}</textarea>
+        <textarea id="indata" name="in" style="width:100%;" rows="15" required>{% if output is not none %}{{ output }}{% endif %}</textarea>
         <div class="mb-5">
             {% if output is none %}
+                <p>Delimitter:<br> 
+                    <input type="radio" id="tab" name="delimitter" value="tab" {% if delimitter != "comma" %}checked="checked"{% endif %}><label for="tab"> tab (eg. excel) </label><br>
+                    <input type="radio" id="comma" name="delimitter" value="comma" {% if delimitter == "comma" %}checked="checked"{% endif %}><label for="comma"> comma (eg. csv) </label><br>
+                </p>
                 <button class="btn btn-primary btn-lg px-4" type="submit">Give me the SQL!</button>
             {% else %}
                 <a class="btn btn-primary btn-lg px-4" href="/"><span data-feather="arrow-left" class="align-text-bottom"></span></a>
@@ -23,8 +27,8 @@
         </div>
     </form>
 
+<!-- 
     <hr class="col-3 col-md-2 mb-5">
-
     <div class="row g-5">
         <div class="col-md-6">
             <h2 class="text-body-emphasis">Starter projects</h2>
@@ -116,7 +120,7 @@
                 </li>
             </ul>
         </div>
-    </div>
+    </div> -->
 
     <script>
     function myFunction() {

@@ -11,11 +11,18 @@ def index():
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
         input = request.form.get("in")
-        output = sqlit(input)
-        return render_template("index.html", output=output)
+        if request.form.get("delimitter") == "tab":
+            delimitter = "\t"
+        if request.form.get("delimitter") == "comma":
+            delimitter = ","
+        output = sqlit(input, delimitter)
+        return render_template("index.html", output=output, delimitter=delimitter)
     # User reached route via GET (as by clicking a link or via redirect)
-    else: 
+    else:
         return render_template("index.html", output=None)
 
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', debug=True)
 
 

@@ -9,7 +9,7 @@ Description:    Prompt for multi line data (assumes data pasted in is
 import re
 
 
-def sqlit(text):
+def sqlit(text, delimitter="\t"):
 
     # set some variables for later
     sql = ""
@@ -22,8 +22,8 @@ def sqlit(text):
 
     # loop through rows of pasted data
     for line in lines:
-        # split  by tabs
-        row = re.split("\t", line)
+        # split using delimitter
+        row = re.split(delimitter, line)
         
         # build out first part of sql statement
         if firstrow:
@@ -72,6 +72,11 @@ if __name__ == "__main__":
     
     # prompt for input
     lines = multiline_input("Paste in excel data and then press enter:")
- 
+
+    while True:
+        delimitter = str(input(r'is the delimitter "\t" or ",": '))
+        if delimitter in [r"\t", ","]:
+            break
+
     # Output sql string
-    print(f"\n\n\n\n{sqlit(lines)}")
+    print(f"\n\n\n\n{sqlit(lines, delimitter)}")
